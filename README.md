@@ -2,4 +2,4 @@
 
 
 ### Setup: `npm install`
-### Run: `npm install`
+### Run: `npm start`
