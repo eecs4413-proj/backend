@@ -1,5 +1,5 @@
 # 4413 Project Backend
 
 
-### `npm install` to get setup
-### `npm install` to run
+### Setup: `npm install`
+### Run: `npm install`
