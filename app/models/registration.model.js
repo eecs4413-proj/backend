@@ -1,33 +1,24 @@
-/**
- * 
- * MY SQL DB Connection 
- * 
- * const mysql = require('mysql')
+const mysql = require('mysql')
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'dbuser',
-  password: 's3kreee7',
-  database: 'my_db'
+  host: 'conviencestore.cw3crbgltbxe.us-east-1.rds.amazonaws.com',
+  user: 'admin',
+  password: 'eecs4413backend',
+  database: 'ConviStore'
 })
 
-connection.connect()
+function connected(){
+  connection.connect((err) => {
+    if(err) throw err;
+    console.log("Successfully Connected");
+  })
+}
 
-connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
-  if (err) throw err
-
-  console.log('The solution is: ', rows[0].solution)
-})
-
-connection.end()
- * 
- */
-
-// Password Hashing
-function pwhash()
-// Authenticate Login
-function authentication()
-//Registration
-function newUser()
-//Reseting the PW
-function resetPw()
-
+function select(attribute){
+  let allUser = [];
+  let sql = `SELECT ${attribute} FROM User`;
+  let query = connection.query(sql,(err,result,field) =>{
+    if(err) throw err;
+      return Object.values(JSON.parse(JSON.stringify(result)));
+  })
+}
+module.exports = {connection, connected,select};
