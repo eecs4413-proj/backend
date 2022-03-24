@@ -1,24 +1,49 @@
-const mysql = require('mysql')
-const connection = mysql.createConnection({
-  host: 'conviencestore.cw3crbgltbxe.us-east-1.rds.amazonaws.com',
-  user: 'admin',
-  password: 'eecs4413backend',
-  database: 'ConviStore'
-})
+const sql = require("./db.js")
 
-function connected(){
-  connection.connect((err) => {
-    if(err) throw err;
-    console.log("Successfully Connected");
-  })
-}
+//constructor 
+const User = function(user) {
+  this.email = user.email;
+  this.pw = user.pw;
+  this.admin = user.admin;
+};
 
-function select(attribute){
-  let allUser = [];
-  let sql = `SELECT ${attribute} FROM User`;
-  let query = connection.query(sql,(err,result,field) =>{
-    if(err) throw err;
-      return Object.values(JSON.parse(JSON.stringify(result)));
-  })
-}
-module.exports = {connection, connected,select};
+User.create = (newUser,result) =>{
+  sql.query("INSERT INTO User SET ?",newUser, (err,res)=>{
+    if(err){
+      console.log("error: ",err);
+      result(err,null);
+      return;
+    }
+    console.log("created User: ", { id: res.insertEmail, ...newUser });
+    result(null, { id: res.insertEmail, ...newUser });
+  });
+};
+
+User.getAll = (email,result)=> {
+  sql.query("SELECT * FROM User", (err,res) =>{
+    if(err){
+      console.log("error: ", err);
+      result(null,err);
+      return;
+    }    
+    console.log("users: ", res);
+    result(null,res);
+  });
+  };
+
+User.findByEmail = (email, result) => {
+  sql.query(`SELECT * FROM User WHERE email = ${email}`,(err,res) => {
+    if(err){
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    if(res.length){
+      console.log("found user: ", res[0]);
+      result(null, res[0]);
+      return;
+    }
+  });
+};
+
+module.exports = User;
