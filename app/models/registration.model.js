@@ -1,33 +1,49 @@
-/**
- * 
- * MY SQL DB Connection 
- * 
- * const mysql = require('mysql')
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'dbuser',
-  password: 's3kreee7',
-  database: 'my_db'
-})
+const sql = require("./db.js")
 
-connection.connect()
+//constructor 
+const User = function(user) {
+  this.email = user.email;
+  this.pw = user.pw;
+  this.admin = user.admin;
+};
 
-connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
-  if (err) throw err
+User.create = (newUser,result) =>{
+  sql.query("INSERT INTO User SET ?",newUser, (err,res)=>{
+    if(err){
+      console.log("error: ",err);
+      result(err,null);
+      return;
+    }
+    console.log("created User: ", { id: res.insertEmail, ...newUser });
+    result(null, { id: res.insertEmail, ...newUser });
+  });
+};
 
-  console.log('The solution is: ', rows[0].solution)
-})
+User.getAll = (email,result)=> {
+  sql.query("SELECT * FROM User", (err,res) =>{
+    if(err){
+      console.log("error: ", err);
+      result(null,err);
+      return;
+    }    
+    console.log("users: ", res);
+    result(null,res);
+  });
+  };
 
-connection.end()
- * 
- */
+User.findByEmail = (email, result) => {
+  sql.query(`SELECT * FROM User WHERE email = ${email}`,(err,res) => {
+    if(err){
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    if(res.length){
+      console.log("found user: ", res[0]);
+      result(null, res[0]);
+      return;
+    }
+  });
+};
 
-// Password Hashing
-function pwhash()
-// Authenticate Login
-function authentication()
-//Registration
-function newUser()
-//Reseting the PW
-function resetPw()
-
+module.exports = User;
