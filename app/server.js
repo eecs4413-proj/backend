@@ -1,21 +1,24 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const _ = require("lodash");
- 
-
+const bodyParser = require('body-parser');
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.urlencoded({extended: true}));
+
+// parse request data content type application
+app.use(bodyParser.urlencoded({extended: false}));
+
+//parse request data content type application/json
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to ConviStore application." });
+  res.send('Hello World');
 });
-require("../app/routes/registration.routes.js")(app);
+
+//import user routes
+const userRoutes = require('./routes/registration.routes');
+
+//create user routes
+app.use('/api/user',userRoutes)
+
+
 app.listen(9000, () => {
   console.log(`Server is running on port 9000.`);
 });

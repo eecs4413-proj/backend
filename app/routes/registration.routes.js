@@ -1,13 +1,21 @@
-const { Router } = require("express");
+const express = require('express');
+const router = express.Router();
 
-module.exports = app => {
-    const users = require("../controllers/registration.cont.js");
-    var router = require("express").Router();
+const userController = require('../controllers/registration.cont');
 
-    //Create new User 
-    router.post("/", users.create);
+// get all users 
+router.get('/', userController.getUserList);
 
-    //Retrieve a single User with email 
-    router.get("/email",users.findEmail);
-    app.use('/api/users',router);
-};
+//get user by email
+router.get('/:email',userController.getUserByEmail);
+
+//create new user
+router.post('/', userController.createNewUser);
+
+//update user 
+router.put('/:email', userController.updateUser);
+
+//delete user 
+router.delete('/:email',userController.deleteUser);
+
+module.exports = router;

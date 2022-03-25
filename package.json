@@ -13,7 +13,9 @@
     "install": "^0.13.0",
     "lodash": "^4.17.21",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.15",
     "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
