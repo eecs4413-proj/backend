@@ -60,9 +60,9 @@ User.updateUser = (email, userReqData, result)=>{
 
 //delete user 
 User.deleteUser = (email,result)=>{
-    dbConn.query('DELETE FROM User WHERE id=?',[email],(err,res)=>{
+    dbConn.query('DELETE FROM User WHERE email=?',email,(err,res)=>{
         if(err){
-            console.log('Error while deleting the user');
+            console.log('Error while deleting the user',err);
             result(null,err);
         }else{
             result(null,res);

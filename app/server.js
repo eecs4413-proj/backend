@@ -12,12 +12,17 @@ app.get("/", (req, res) => {
   res.send('Hello World');
 });
 
+//import item routes
+const itemRoutes = require('./routes/catalog.routes');
+
 //import user routes
 const userRoutes = require('./routes/registration.routes');
 
 //create user routes
-app.use('/api/user',userRoutes)
+app.use('/api/user',userRoutes);
 
+//
+app.use('/api/item',itemRoutes);
 
 app.listen(9000, () => {
   console.log(`Server is running on port 9000.`);
