@@ -23,9 +23,12 @@ exports.getUserByEmail = (req, res) => {
 };
 
 // Create new User
+const {genSaltSync, hashSync} = require("bcrypt");
 exports.createNewUser = (req, res) => {
   const userReqData = new User(req.body);
   console.log("userReqData", userReqData);
+  const salt = genSaltSync(10);
+  userReqData.pw = hashSync(userReqData.pw,salt);
   //check null
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     res.send(400).send({ success: false, message: "Please fill all fields" });
@@ -45,6 +48,8 @@ exports.createNewUser = (req, res) => {
 // Update a User
 exports.updateUser = (req, res) => {
   const userReqData = new User(req.body);
+  const salt = genSaltSync(10);
+  userReqData.pw = hashSync(userReqData.pw,salt);
   console.log("userReqData update", userReqData);
   //check null
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
