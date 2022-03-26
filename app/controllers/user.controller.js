@@ -1,6 +1,6 @@
 
-const User = require('../models/registration.model');
-const UserModel = require('../models/registration.model');
+const User = require('../models/user.model');
+const UserModel = require('../models/user.model');
 
 //get all user list 
 exports.getUserList = (req,res) =>{
@@ -11,7 +11,6 @@ exports.getUserList = (req,res) =>{
         res.send(err);
         console.log('Users', users);
         res.send(users);
-
     })
 }
 
@@ -62,7 +61,7 @@ exports.updateUser = (req,res)=>{
 
 //delete user 
 exports.deleteUser = (req,res) =>{
-    UserModel.deleteUser(req.param.email, (err,user)=>{
+    UserModel.deleteUser(req.params.email, (err,user)=>{
         if(err)
         res.send(err);
         res.json({success:true, message: "User deleted successfully"});
