@@ -14,7 +14,7 @@ module.exports = (app) => {
   router.put("/:email", userController.updateUser);
 
   // Delete all Users
-  router.delete("/", userController.deleteUser);
+  router.delete("/", userController.deleteAllUser);
   // Delete a User with email
   router.delete("/:email", userController.deleteUser);
 
