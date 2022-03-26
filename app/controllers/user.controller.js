@@ -23,7 +23,9 @@ exports.getUserByEmail = (req, res) => {
 };
 
 // Create new User
-const {genSaltSync, hashSync} = require("bcrypt");
+const {genSaltSync, hashSync,compareSync} = require("bcrypt");
+// JSON token 
+const {sign} =require("jsonwebtoken");
 exports.createNewUser = (req, res) => {
   const userReqData = new User(req.body);
   console.log("userReqData", userReqData);
@@ -82,3 +84,34 @@ exports.deleteAllUser = (req, res) => {
     res.json({ success: true, message: "All Users deleted successfully" });
   });
 };
+exports.login = (req,res) => {
+  const userReqData = new User(req.body);
+  this.getUserByEmail(userReqData.email,(err,results) => {
+    if(err){
+      console.log(err);
+    }
+    if(!results){
+      return res.json({
+        sucess:0,
+        data: "Invalid email or password"
+      })
+    }
+    const result = compareSync(userReqData.pw, results.pw);
+    if(result) {
+      results.pw = undefined;
+      const jsontoken = sign({result : results}, "eecs4413", {
+        expiresIn: "1h"
+      });
+      return res.json({
+        sucess: 1,
+        message: "login successfully",
+        token: jsontoken
+      });
+    }else{
+        return res.json({
+          sucess: 0,
+          data: "Invalid email or password"
+        });
+    }
+  });
+}

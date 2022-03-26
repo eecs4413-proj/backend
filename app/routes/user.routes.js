@@ -18,5 +18,8 @@ module.exports = (app) => {
   // Delete a User with email
   router.delete("/:email", userController.deleteUser);
 
+  //login 
+  router.post("/login",userController.login);
+
   app.use("/api/user", router);
 };
