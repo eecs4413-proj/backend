@@ -37,4 +37,57 @@ Item.getItemByBid = (bid,result) =>{
     })
 }
 
+//Create new Item
+Item.createItem = (itemData,result) => {
+    dbConn.query("INSERT INTO Item SET ?",itemData,(err,res)=> {
+        if(err){
+            console.log("Error while inserting data");
+            result(null,err);
+        }else{
+            console.log("Item created successfully");
+            result(null,res);
+        }
+    });
+};
+
+//Update item 
+Item.updateItem =(bid, itemReqData, result) => {
+    dbConn.query(
+        "UPDATE Item SET name=?, description=?, type=?, brand=?, stock=?, imgsrc=?, price=? WHERE bid=?",
+        [itemReqData.name,itemReqData.description,itemReqData.type,itemReqData.brand,itemReqData.brand,itemReqData.stock,itemReqData.imgsrc,itemReqData.price,bid],
+        (err, res) => {
+            if(err) {
+                console.log("Error while updating the record");
+                result(null,err);
+            }else{
+                console.log("Item Updated Successfully");
+                result(null,res);
+            }
+        });
+};
+
+//Delete a item with bid 
+Item.deleteItem = (bid,result) => {
+    dbConn.query("DELETE FROM Item WHERE bid=?",bid,(err,res)=>{
+        if(err){
+            console.log("Error while deleting item",err);
+            result(null,err);
+        }else {
+            result(null,res);
+        }
+    })
+}
+
+//Delete all Item 
+Item.deleteAllItems = (result) => {
+    dbConn.query("DELETE FROM Item", (err,res) => {
+        if(err) {
+            console.log("Error while deleting the item",err);
+            result(null,err);
+        }else{
+            result(null,res);
+        }
+    });
+};
+
 module.exports = Item;
