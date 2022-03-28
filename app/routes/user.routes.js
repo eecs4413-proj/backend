@@ -1,25 +1,25 @@
-module.exports = (app) => {
-  const router = require("express").Router();
-  const userController = require("../controllers/user.controller.js");
 
-  // Retrieve all Users
-  router.get("/", userController.getUserList);
-  // Retrieve a User with email
-  router.get("/:email", userController.getUserByEmail);
+  const router = require("express").Router();
+  const {createUser, getUserByEmail,getUsers,updateUsers,deleteUser,login} = require("../controllers/user.controller.js");
+  const { checkToken } = require("../auth/token_validation");
 
   // Create new User
-  router.post("/", userController.createNewUser);
+  router.post("/", checkToken,createUser);
 
-  // Update a User with email
-  router.put("/:email", userController.updateUser);
+  //Retrieve Users
+  router.get("/",checkToken,getUsers);
 
-  // Delete all Users
-  router.delete("/", userController.deleteAllUser);
-  // Delete a User with email
-  router.delete("/:email", userController.deleteUser);
+  //Retrieve Single User
+  router.get("/:email",checkToken,getUserByEmail);
 
-  //login 
-  router.post("/login",userController.login);
+//Update User 
+  router.patch("/",checkToken,updateUsers);
 
-  app.use("/api/user", router);
-};
+  //Delete 
+  router.delete("/",checkToken,deleteUser);
+
+  //login
+  router.post("/login",login);
+  module.exports = router;
+  
+
