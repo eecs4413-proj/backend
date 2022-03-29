@@ -1,5 +1,5 @@
-const {create, getUserByEmail,getUsers,updateUser,deleteUser } = require("../models/user.model");
-const UserModel = require("../models/user.model");
+const {create, getUserByEmail,getUsers,updateUser,deleteUser } = require("../models/user.model.js");
+const UserModel = require("../models/user.model.js");
 
 // Create new User
 const {genSaltSync, hashSync,compareSync,compare} = require("bcrypt");
