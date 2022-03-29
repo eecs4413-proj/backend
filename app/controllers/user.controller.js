@@ -111,7 +111,7 @@ module.exports = {
       console.log(body.pw);
       console.log(results.pw);
       
-      const result = compare(body.pw,results.pw);
+      let result = compareSync(body.pw,results.pw);
       console.log(result)
       if(result){
         results.pw = undefined;

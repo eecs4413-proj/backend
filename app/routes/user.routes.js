@@ -4,7 +4,7 @@
   const { checkToken } = require("../auth/token_validation");
 
   // Create new User
-  router.post("/", checkToken,createUser);
+  router.post("/",createUser);
 
   //Retrieve Users
   router.get("/",checkToken,getUsers);
