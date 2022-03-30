@@ -1,6 +1,8 @@
 module.exports = (app) => {
   const router = require("express").Router();
   const userController = require("../controllers/user.controller.js");
+  var cors = require('cors');
+  app.use(cors());
 
   // Retrieve all Users
   router.get("/", userController.getUserList);
