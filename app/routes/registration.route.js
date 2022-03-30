@@ -4,6 +4,9 @@ module.exports = app => {
     const users = require("../controllers/registration.cont.js");
     var router = require("express").Router();
 
+    var cors = require('cors');
+    app.use(cors());
+    
     //Create new User 
     router.post("/", users.create);
 

@@ -18,7 +18,8 @@ app.get("/", (req, res) => {
 
 //create user routes
 //app.use('/api/user',userRoutes);
-require("./app/routes/user.routes.js")(app);
+const userRouter = require("../backend/app/routes/user.routes");
+app.use("/api/user",userRouter);
 app.use("/api/item", itemRoutes);
 app.use("/api/shoppingcart",shoppingcartRoutes);
 
