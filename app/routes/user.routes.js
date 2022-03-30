@@ -2,8 +2,7 @@
   const router = require("express").Router();
   const {createUser, getUserByEmail,getUsers,updateUsers,deleteUser,login} = require("../controllers/user.controller.js");
   const { checkToken } = require("../auth/token_validation");
-  var cors = require('cors');
-  app.use(cors());
+
   
   // Create new User
   router.post("/", createUser);
