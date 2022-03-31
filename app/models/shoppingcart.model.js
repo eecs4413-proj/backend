@@ -1,7 +1,7 @@
 var dbConn = require("../config/db.config");
 
 var ShoppingCart = function (shoppingcart) {
-  this.userID = shoppingcart.userID;
+  this.userEmail = shoppingcart.userEmail;
   this.itemNo = shoppingcart.itemNo;
   this.quantity = shoppingcart.quantity;
 };
@@ -20,14 +20,14 @@ ShoppingCart.getAllShoppingCarts = (result) => {
   });
 };
 
-//Retrieve ShoppingCart with userID
-ShoppingCart.getShoppingCartByuserID = (userID, result) => {
+//Retrieve ShoppingCart with userEmail
+ShoppingCart.getShoppingCartByuserEmail = (userEmail, result) => {
   dbConn.query(
-    "SELECT * FROM ShoppingCart WHERE userID=?",
-    userID,
+    "SELECT * FROM ShoppingCart WHERE userEmail=?",
+    userEmail,
     (err, res) => {
       if (err) {
-        console.log("Error while fetching shoppingcart by userID", err);
+        console.log("Error while fetching shoppingcart by userEmail", err);
         result(null, err);
       } else {
         result(null, res);
@@ -54,10 +54,10 @@ ShoppingCart.createShoppingCart = (shoppingcartData, result) => {
 };
 
 //Update ShoppingCart
-ShoppingCart.updateShoppingCart = (userID, shoppingcartReqData, result) => {
+ShoppingCart.updateShoppingCart = (userEmail, shoppingcartReqData, result) => {
   dbConn.query(
-    "UPDATE ShoppingCart SET itemNo=?, quantity=? WHERE userID=?",
-    [shoppingcartReqData.itemNo, shoppingcartReqData.quantity, userID],
+    "UPDATE ShoppingCart SET itemNo=?, quantity=? WHERE userEmail=?",
+    [shoppingcartReqData.itemNo, shoppingcartReqData.quantity, userEmail],
     (err, res) => {
       if (err) {
         console.log("Error while updating the record");
@@ -70,11 +70,11 @@ ShoppingCart.updateShoppingCart = (userID, shoppingcartReqData, result) => {
   );
 };
 
-// Delete a ShoppingCart with userID
-ShoppingCart.deleteShoppingCart = (userID, result) => {
+// Delete a ShoppingCart with userEmail
+ShoppingCart.deleteShoppingCart = (userEmail, result) => {
   dbConn.query(
-    "DELETE FROM ShoppingCart WHERE userID=?",
-    userID,
+    "DELETE FROM ShoppingCart WHERE userEmail=?",
+    userEmail,
     (err, res) => {
       if (err) {
         console.log("Error while deleting the shoppingcart", err);
@@ -86,11 +86,11 @@ ShoppingCart.deleteShoppingCart = (userID, result) => {
   );
 };
 
-// Delete a ShoppingCart with userID
+// Delete a ShoppingCart with userEmail
 ShoppingCart.deleteItemInShoppingCart = (shoppingcartData, result) => {
   dbConn.query(
-    "DELETE FROM ShoppingCart WHERE userID=? AND itemNo=?",
-    [shoppingcartData.userID, shoppingcartData.itemNo], 
+    "DELETE FROM ShoppingCart WHERE userEmail=? AND itemNo=?",
+    [shoppingcartData.userEmail, shoppingcartData.itemNo], 
     (err, res) => {
       if (err) {
         console.log("Error while deleting the shoppingcart", err);
