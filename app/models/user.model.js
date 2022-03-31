@@ -5,7 +5,7 @@ var dbConn = require("../config/db.config");
 module.exports = {
   //Create User
   create: (data, callBack) => {
-    dbConn.query(`INSERT INTO User(email,pw,admin) values(?,?,?)`, [data.email,data.pw,data.admin],(error, results,fields)=>{
+    dbConn.query(`INSERT INTO User(email,pw,admin,fname,lname) values(?,?,?,?,?)`, [data.email,data.pw,data.admin,data.fname,data.lname],(error, results,fields)=>{
       if(error) {
         callBack(error)
       }

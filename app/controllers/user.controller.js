@@ -126,7 +126,7 @@ module.exports = {
       }else{
         return res.json({
           sucess: 0,
-          data: "Invalid email or password2"
+          message: "Invalid email or password"
         });
       }
     });
