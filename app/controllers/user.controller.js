@@ -1,8 +1,12 @@
 const {
+  createAddress,
   create,
+  getAddressByEmail,
   getUserByEmail,
   getUsers,
   updateUser,
+  updateAddress,
+  deleteAddress,
   deleteUser,
 } = require("../models/user.model.js");
 const UserModel = require("../models/user.model.js");
@@ -10,8 +14,25 @@ const UserModel = require("../models/user.model.js");
 // Create new User
 const { genSaltSync, hashSync, compareSync, compare } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
+const { result } = require("lodash");
 
 module.exports = {
+  createAddress: (req,res)=> {
+    const body = req.body;
+    createAddress(body,(err,results)=>{
+      if(err) {
+        console.log(error);
+        return res.status(500),json({
+          sucess: 0,
+          message: "Database connection failed",
+        });
+      }
+      return res.status(200).json({
+        sucess:1,
+        data: results,
+      });
+    })
+  },
   createUser: (req, res) => {
     const body = req.body;
     const salt = genSaltSync(10);
@@ -40,6 +61,25 @@ module.exports = {
       if (!results) {
         return res.json({
           success: 0,
+          message: "Record Not Found",
+        });
+      }
+      return res.json({
+        sucess: 1,
+        data: results,
+      });
+    });
+  },
+  getAddressByEmail:(req,res)=>{
+    const userEmail = req.params.userEmail;
+    getAddressByEmail(userEmail,(err,results) => {
+      if(err) {
+        console.log(err);
+        return;
+      }
+      if(!results){
+        return res.json({
+          sucess: 0,
           message: "Record Not Found",
         });
       }
@@ -82,6 +122,25 @@ module.exports = {
       });
     });
   },
+  updateAddress: (req,res) => {
+    const body = req.body;
+    updateAddress(body,(err,results)=> {
+      if(err){
+        console.log(err);
+        return;
+      }
+      if(!results) {
+        return res.json({
+          sucess:0,
+          message: "Failed to Update Address",
+        });
+      }
+      return res.json({
+        sucess: 1,
+        message: "Update Sucessfully",
+      });
+    });
+  },
   deleteUser: (req, res) => {
     const data = req.body;
     deleteUser(data, (err, results) => {
@@ -99,6 +158,26 @@ module.exports = {
       return res.json({
         success: 1,
         message: "User Deleted Sucessfully",
+      });
+    });
+  },
+  deleteAdress: (req,res) => {
+    const data = req.body;
+    deleteAddress(data,(err, results)=>{
+      if(err) {
+        console.log(err);
+        return;
+      }
+      console.log("delete address result: " + results);
+      if(!results){
+        return res.json({
+          sucess: 0, 
+          message: "Record Not Found",
+        });
+      }
+      return res.json({
+        sucess: 1,
+        message: "Address Deleted Sucessfully",
       });
     });
   },
