@@ -9,10 +9,10 @@ exports.getShoppingCartList = (req, res) => {
   });
 };
 
-//Retrieve shoppingcart by userID(email)
-exports.getShoppingCartByuserID = (req, res) => {
-  ShoppingCartModel.getShoppingCartByuserID(
-    req.params.userID,
+//Retrieve shoppingcart by userEmail(email)
+exports.getShoppingCartByuserEmail = (req, res) => {
+  ShoppingCartModel.getShoppingCartByuserEmail(
+    req.params.userEmail,
     (err, shoppingcart) => {
       if (err) res.send(err);
       console.log("Single ShoppingCart Data", shoppingcart);
@@ -35,7 +35,7 @@ exports.createNewShopingCart = (req, res) => {
       res.json({
         status: true,
         message: "Shoppingcart Created Successfully",
-        data: shoppingcart.insertuserID,
+        data: shoppingcart.insertuserEmail,
       });
     });
   }
@@ -51,7 +51,7 @@ exports.updateShoppingCart = (req, res) => {
   } else {
     console.log("valid data");
     ShoppingCartModel.updateShoppingCart(
-      req.params.userID,
+      req.params.userEmail,
       shoppingcartReqData,
       (err, shoppingcart) => {
         if (err) res.send(err);
@@ -64,10 +64,10 @@ exports.updateShoppingCart = (req, res) => {
   }
 };
 
-//Delete a shoppingcart with userID(email)
+//Delete a shoppingcart with userEmail(email)
 exports.deleteShoppingCart = (req, res) => {
   ShoppingCartModel.deleteShoppingCart(
-    req.params.userID,
+    req.params.userEmail,
     (err, shoppingcart) => {
       if (err) {
         res.send(err);
@@ -77,7 +77,7 @@ exports.deleteShoppingCart = (req, res) => {
   );
 };
 
-//Delete a shoppingcart with userID(email)
+//Delete a shoppingcart with userEmail(email)
 exports.deleteItemInShoppingCart = (req, res) => {
   ShoppingCartModel.deleteItemInShoppingCart(
     req.params,
