@@ -1,6 +1,32 @@
 var dbConn = require("../config/db.config");
 
 module.exports = {
+  //Create Address 
+  createAddress: (data, callBack) => {
+    dbConn.query(
+      `INSERT INTO Address(street,province,zip,phone,userEmail) values(?,?,?,?,?)`,
+      [data.street, data.province, data.zip, data.phone, data.userEmail],
+      (error, results, fields) => {
+        if (error) {
+          callBack(error);
+        }
+        return callBack(null, results);
+      }
+    );
+  },
+  //Retrieve Address according User 
+  getAddressByEmail: (userEmail, callBack) => {
+    dbConn.query(
+      `SELECT * FROM Address WHERE userEmail=?`,
+      [userEmail],
+      (error, results, fields) => {
+        if (error) {
+          callBack(error);
+        }
+        return callBack(null, results[0]);
+      }
+    );
+  },
   //Create User
   create: (data, callBack) => {
     dbConn.query(
@@ -50,6 +76,19 @@ module.exports = {
       }
     );
   },
+  //Update address
+  updateAddress: (data,callBack)=> {
+    dbConn.query(
+      `UPDATE Address SET street=?, province=?, zip=?, phone=? WHERE userEmail=?`,
+      [data.street, data.province, data.zip, data.phone, data.userEmail],
+      (error,results, fields) => {
+        if(error){
+          callBack(error);
+        }
+        return callBack(null, results);
+      }
+    );
+  },
 
   deleteUser: (data, callBack) => {
     console.log("delete user email = " + data.email);
@@ -66,4 +105,20 @@ module.exports = {
       }
     );
   },
+  deleteAddress: (data, callBack) => {
+    console.log("delete address email = " + data.userEmail);
+    dbConn.query(
+      `DELETE FROM Address WHERE userEmail=?`,
+      [data.userEmail],
+      (error, results, fields) => {
+        if (error) {
+          return callBack(error);
+        }
+        return callBack(null, true);        
+      }
+    );
+  },
+  
 };
+
+
