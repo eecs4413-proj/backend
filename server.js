@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-var cors = require('cors');
+var cors = require("cors");
 //import routes
 const userRoutes = require("./app/routes/user.routes");
 const itemRoutes = require("./app/routes/catalog.routes");
@@ -17,11 +17,9 @@ app.get("/", (req, res) => {
 });
 
 //create user routes
-//app.use('/api/user',userRoutes);
-const userRouter = require("../backend/app/routes/user.routes");
-app.use("/api/user",userRouter);
+app.use("/api/user", userRoutes);
 app.use("/api/item", itemRoutes);
-app.use("/api/shoppingcart",shoppingcartRoutes);
+app.use("/api/shoppingcart", shoppingcartRoutes);
 
 app.listen(9000, () => {
   console.log(`Server is running on port 9000.`);
