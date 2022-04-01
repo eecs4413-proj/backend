@@ -21,4 +21,12 @@ router.delete("/:bid", itemController.deleteItem);
 //update item with bid
 router.put("/:bid", itemController.updateItem);
 
+//Review APIs
+router.get("/review/:bid", itemController.getReview);
+
+router.post("/review", itemController.createNewReview);
+
+router.delete("/review/:reviewNo", itemController.deleteReview);
+
+router.put("/review/:reviewNo", itemController.updateReview);
 module.exports = router;

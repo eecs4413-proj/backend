@@ -1,5 +1,7 @@
 const Item = require("../models/catalogue.model");
 const ItemModel = require("../models/catalogue.model");
+const Review = require("../models/catalogue.model");
+const ReviewModel = require("../models/catalogue.model");
 
 //get all item list
 exports.getItemList = (req, res) => {
@@ -72,4 +74,60 @@ exports.deleteAllItem = (req, res) => {
     }
     res.json({ sucess: true, message: "All items deleted sucessfully" });
   });
+};
+
+
+//get review by bid from DB
+exports.getReview = (req, res) => {
+  ReviewModel.getReview(req.params.bid, (err, reviews) => {
+    if (err) res.send(err);
+    console.log("Review data", reviews);
+    res.send(reviews);
+  });
+};
+
+//Create new review
+exports.createNewReview= (req, res) => {
+  const reviewReqData = new Review(req.body);
+  console.log("reviewReqData", reviewReqData);
+  //check null
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res.send(400).send({ sucess: false, message: "Please fill all fields" });
+  } else {
+    console.log("valid data");
+    ReviewModel.createReview(reviewReqData, (err, review) => {
+      if (err) res.send(err);
+      res.json({
+        status: true,
+        message: "Review created successfully",
+        data: review.insertbid,
+      });
+    });
+  }
+};
+
+//Delete a Review with reviewNo
+exports.deleteReview = (req, res) => {
+  ReviewModel.deleteReview(req.params.reviewNo, (err, review) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json({ success: true, message: "Review deleted successfully" });
+  });
+};
+
+//Update a review
+exports.updateReview = (req, res) => {
+  const reviewReqData = new Review(req.body);
+  console.log("reviewReqData update", reviewReqData);
+
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res.send(400).send({ sucess: false, message: "Please fill all fields" });
+  } else {
+    console.log("valid data");
+    ReviewModel.updateReview(req.params.reviewNo, reviewReqData, (err, review) => {
+      if (err) res.send(err);
+      res.json({ status: true, message: "Review updated sucessfully" });
+    });
+  }
 };
