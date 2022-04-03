@@ -1,7 +1,7 @@
 const Item = require("../models/catalogue.model");
 const ItemModel = require("../models/catalogue.model");
-const Review = require("../models/catalogue.model");
-const ReviewModel = require("../models/catalogue.model");
+const Review = require("../models/review.model");
+const ReviewModel = require("../models/review.model");
 
 //get all item list
 exports.getItemList = (req, res) => {
