@@ -23,4 +23,20 @@ router.delete("/:userEmail", orderController.deleteOrder);
 //update order with userEmail 
 router.put("/:userEmail",orderController.updateOrder);
 
+
+//get orderedItem 
+router.get("/orderItem", orderController.getOrderedItem);
+
+//get orderedItem by orderNo
+router.get("/orderItem/:orderNo",orderController.getOrderedItemByON);
+
+//create orderedItem
+router.post("/orderItem",orderController.createNewOrderedItem);
+
+//delete orderedItem with orderNo + itemNo
+router.delete("/orderItem/:orderNo/:itemNo",orderController.deleteItemWithOrderNoandItemNo);
+
+//delete orderItem with orderNo
+router.delete("/orderItem/:orderNo",orderController.deleteOrderWithOrderNo);
+
 module.exports = router;
