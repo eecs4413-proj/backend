@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const shoppingcartController = require("../controllers/shoppingcart.controller");
+const { checkToken } = require("../auth/token_validation");
 
 //Retrieve all shoppingcarts
 router.get("/", shoppingcartController.getShoppingCartList);
@@ -8,18 +9,18 @@ router.get("/", shoppingcartController.getShoppingCartList);
 router.get("/:userEmail", shoppingcartController.getShoppingCartByuserEmail);
 
 //Create new shoping cart
-router.post("/", shoppingcartController.createNewShopingCart);
+router.post("/",checkToken, shoppingcartController.createNewShopingCart);
 
 //Update a shoppingcar with userEmail
-router.put("/:userEmail", shoppingcartController.updateShoppingCart);
+router.put("/:userEmail",checkToken, shoppingcartController.updateShoppingCart);
 
 //Delete all shoppingcarts
-router.delete("/", shoppingcartController.deleteAllShoppingCart);
+router.delete("/", checkToken, shoppingcartController.deleteAllShoppingCart);
 
 //Delete a shoppingcart with userEmail
-router.delete("/:userEmail", shoppingcartController.deleteShoppingCart);
+router.delete("/:userEmail",checkToken, shoppingcartController.deleteShoppingCart);
 
 //Delete a item in userEmail's shoppingcart
-router.delete("/:userEmail/:itemNo", shoppingcartController.deleteItemInShoppingCart);
+router.delete("/:userEmail/:itemNo",checkToken, shoppingcartController.deleteItemInShoppingCart);
 
 module.exports = router;
