@@ -34,7 +34,7 @@ module.exports = {
       [data.email, data.pw, data.fname, data.lname, data.admin],
       (error, results, fields) => {
         if (error) {
-          callBack(error);
+         callBack(error);
         }
         return callBack(null, results);
       }
