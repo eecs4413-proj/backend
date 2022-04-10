@@ -22,7 +22,7 @@ module.exports = {
     createAddress(body,(err,results)=>{
       if(err) {
         res.sendStatus(500);
-        return res.status(500),json({
+        return res.json({
           sucess: 0,
           message: "Database connection failed",
         });
@@ -59,7 +59,7 @@ module.exports = {
       }
       if (!results) {
         res.sendStatus(404);
-        return res.status(404).json({
+        return res.json({
           success: 0,
           message: "Record Not Found",
         });
@@ -79,7 +79,7 @@ module.exports = {
       }
       if(!results){
         res.sendStatus(404);
-        return res.status(404).json({
+        return res.json({
           sucess: 0,
           message: "Record Not Found",
         });
@@ -113,7 +113,7 @@ module.exports = {
       }
       if (!results) {
         res.sendStatus(402);
-        return res.status(402).json({
+        return res.json({
           success: 0,
           message: "Failed to Update User",
         });
@@ -133,7 +133,7 @@ module.exports = {
       }
       if(!results) {
         res.sendStatus(402);
-        return res.status(402).json({
+        return res.json({
           sucess:0,
           message: "Failed to Update Address",
         });
@@ -154,7 +154,7 @@ module.exports = {
       console.log("delete user result: " + results);
       if (!results) {
         res.sendStatus(404);
-        return res.status(404).json({
+        return res.json({
           success: 0,
           message: "Record Not Found",
         });
@@ -175,7 +175,7 @@ module.exports = {
       console.log("delete address result: " + results);
       if(!results){
         res.sendStatus(404);
-        return res.status(404).json({
+        return res.json({
           sucess: 0, 
           message: "Record Not Found",
         });
@@ -194,7 +194,7 @@ module.exports = {
       }
       if (!results) {
         res.sendStatus(404);
-        return res.status(404).json({
+        return res.json({
           success: 0,
           data: "Invalid email or password 1",
         });
