@@ -21,7 +21,6 @@ module.exports = {
     const body = req.body;
     createAddress(body,(err,results)=>{
       if(err) {
-        console.log(error);
         return res.status(500),json({
           sucess: 0,
           message: "Database connection failed",

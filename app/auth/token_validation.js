@@ -17,8 +17,8 @@ module.exports = {
                 }
             });
         }else{
-            res.json({
-                sucess:0,
+            res.status(404).json({
+                sucess: 0,
                 message: "Access denied! unauthroized user"
             })
         }
