@@ -21,8 +21,7 @@ module.exports = {
     const body = req.body;
     createAddress(body,(err,results)=>{
       if(err) {
-        res.sendStatus(500);
-        return res.json({
+        return res.status(500),json({
           sucess: 0,
           message: "Database connection failed",
         });
@@ -58,8 +57,7 @@ module.exports = {
         return;
       }
       if (!results) {
-        res.sendStatus(404);
-        return res.json({
+        return res.status(404).json({
           success: 0,
           message: "Record Not Found",
         });
@@ -78,8 +76,7 @@ module.exports = {
         return;
       }
       if(!results){
-        res.sendStatus(404);
-        return res.json({
+        return res.status(404).json({
           sucess: 0,
           message: "Record Not Found",
         });
@@ -112,8 +109,7 @@ module.exports = {
         return;
       }
       if (!results) {
-        res.sendStatus(402);
-        return res.json({
+        return res.status(402).json({
           success: 0,
           message: "Failed to Update User",
         });
@@ -132,8 +128,7 @@ module.exports = {
         return;
       }
       if(!results) {
-        res.sendStatus(402);
-        return res.json({
+        return res.status(402).json({
           sucess:0,
           message: "Failed to Update Address",
         });
@@ -153,8 +148,7 @@ module.exports = {
       }
       console.log("delete user result: " + results);
       if (!results) {
-        res.sendStatus(404);
-        return res.json({
+        return res.status(404).json({
           success: 0,
           message: "Record Not Found",
         });
@@ -174,8 +168,7 @@ module.exports = {
       }
       console.log("delete address result: " + results);
       if(!results){
-        res.sendStatus(404);
-        return res.json({
+        return res.status(404).json({
           sucess: 0, 
           message: "Record Not Found",
         });
@@ -193,8 +186,7 @@ module.exports = {
         console.log(err);
       }
       if (!results) {
-        res.sendStatus(404);
-        return res.json({
+        return res.status(404).json({
           success: 0,
           data: "Invalid email or password 1",
         });
@@ -216,7 +208,7 @@ module.exports = {
           token: jsontoken,
         });
       } else {
-        return res.json({
+        return res.status(403).json({
           success: 0,
           data: "Invalid email or password2",
         });

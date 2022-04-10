@@ -26,7 +26,7 @@ exports.createNewItem = (req, res) => {
   console.log("itemReqData", itemReqData);
   //check null
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    res.send(400).send({ sucess: false, message: "Please fill all fields" });
+    res.status(400).send({ sucess: false, message: "Please fill all fields" });
   } else {
     console.log("valid data");
     ItemModel.createItem(itemReqData, (err, item) => {
@@ -46,7 +46,7 @@ exports.updateItem = (req, res) => {
   console.log("itemReqData update", itemReqData);
 
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    res.send(400).send({ sucess: false, message: "Please fill all fields" });
+    res.status(400).send({ sucess: false, message: "Please fill all fields" });
   } else {
     console.log("valid data");
     ItemModel.updateItem(req.params.bid, itemReqData, (err, item) => {
@@ -92,7 +92,7 @@ exports.createNewReview= (req, res) => {
   console.log("reviewReqData", reviewReqData);
   //check null
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    res.send(400).send({ sucess: false, message: "Please fill all fields" });
+    res.status(400).send({ sucess: false, message: "Please fill all fields" });
   } else {
     console.log("valid data");
     ReviewModel.createReview(reviewReqData, (err, review) => {
@@ -122,7 +122,7 @@ exports.updateReview = (req, res) => {
   console.log("reviewReqData update", reviewReqData);
 
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    res.send(400).send({ sucess: false, message: "Please fill all fields" });
+    res.status(400).send({ sucess: false, message: "Please fill all fields" });
   } else {
     console.log("valid data");
     ReviewModel.updateReview(req.params.reviewNo, reviewReqData, (err, review) => {
