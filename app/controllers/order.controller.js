@@ -27,7 +27,8 @@ exports.createNewOrder = (req,res) => {
     //check null
 
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
-        res.send(400).send({sucess: false, message: "Please fill all fields"});
+        res.sendStatus(400);
+        res.send({sucess: false, message: "Please fill all fields"});
     }else{
         console.log("valid data");
         OrderModel.createOrder(orderReqData,(err,order)=> {
@@ -46,7 +47,8 @@ exports.updateOrder = (req,res) => {
     const orderReqData = new Order(req.body);
     console.log("orderReqData update", orderReqData);
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
-        res.send(400).send({sucess: false, message: "Please fill all fields"});
+        res.sendStatus(400);
+        res.send({sucess: false, message: "Please fill all fields"});
     }else{
         console.log("valid data");
         OrderModel.updateOrder(req.params.userEmail, orderReqData,(err,order)=>{
@@ -112,7 +114,8 @@ exports.createNewOrderedItem = (req, res) =>{
     console.log("orderItemReqData",orderItemReqData);
     //check null
     if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
-        res.send(400).send({sucess: false, message: "Please fill all fields"});
+        res.sendStatus(400);
+        res.send({sucess: false, message: "Please fill all fields"});
     }else {
         console.log("valid data");
         OrderItemModel.createOrderedItem(orderItemReqData, (err, orderitem)=>{
@@ -133,7 +136,8 @@ exports.updateOrderedItem = (req,res) => {
     console.log("orderedItemReqData", orderedItemReqData);
 
     if(req.body.constructor === Object && Object.keys(req.body).length===0){
-        res.send(400).send({sucess: false, mesage: "Please fill all fields"});
+        res.sendStatus(400);
+        res.send({sucess: false, mesage: "Please fill all fields"});
     }else{
         console.log("valid data");
         OrderItemModel.updateOrderedItem(req.params.orderNo, orderedItemReqData, (err, orderItem)=>{

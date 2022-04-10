@@ -16,7 +16,8 @@ exports.createNewIpaddress = (req,res) => {
     console.log("ipaddressReqData", ipaddressReqData);
     //check null
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
-        res.send(400).send({
+        res.sendStatus(400);
+        res.send({
             success: false,
             message: "Please fill all fields"
         });
