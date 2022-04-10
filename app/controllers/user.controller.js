@@ -129,7 +129,7 @@ module.exports = {
         return;
       }
       if(!results) {
-        return res.json({
+        return res.status(402).json({
           sucess:0,
           message: "Failed to Update Address",
         });
@@ -149,7 +149,7 @@ module.exports = {
       }
       console.log("delete user result: " + results);
       if (!results) {
-        return res.json({
+        return res.status(404).json({
           success: 0,
           message: "Record Not Found",
         });
@@ -169,7 +169,7 @@ module.exports = {
       }
       console.log("delete address result: " + results);
       if(!results){
-        return res.json({
+        return res.status(404).json({
           sucess: 0, 
           message: "Record Not Found",
         });
@@ -187,7 +187,7 @@ module.exports = {
         console.log(err);
       }
       if (!results) {
-        return res.json({
+        return res.status(404).json({
           success: 0,
           data: "Invalid email or password 1",
         });
