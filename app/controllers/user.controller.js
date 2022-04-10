@@ -39,8 +39,6 @@ module.exports = {
     body.pw = hashSync(body.pw, salt);
     create(body, (err, results) => {
       if (err) {
-        console.log(error);
-        res.sendStatus(500);
         return res.status(500).json({
           success: 0,
           message: "Database connection failed",
