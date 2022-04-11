@@ -22,12 +22,12 @@ module.exports = {
     createAddress(body,(err,results)=>{
       if(err) {
         return res.status(500),json({
-          sucess: 0,
+          success: 0,
           message: "Database connection failed",
         });
       }
       return res.status(200).json({
-        sucess: 1,
+        success: 1,
         data: results,
       });
     })
