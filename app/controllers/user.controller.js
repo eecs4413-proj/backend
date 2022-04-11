@@ -188,7 +188,7 @@ module.exports = {
       if (!results) {
         return res.status(404).json({
           success: 0,
-          data: "Invalid email or password 1",
+          message: "Invalid email or password 1",
         });
       }
 
@@ -210,7 +210,7 @@ module.exports = {
       } else {
         return res.status(403).json({
           success: 0,
-          data: "Invalid email or password2",
+          message: "Invalid email or password2",
         });
       }
     });
