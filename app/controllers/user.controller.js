@@ -27,7 +27,7 @@ module.exports = {
         });
       }
       return res.status(200).json({
-        sucess:1,
+        sucess: 1,
         data: results,
       });
     })
