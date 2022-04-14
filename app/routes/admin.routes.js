@@ -4,7 +4,7 @@ const router = express.Router();
 const adminController = require("../controllers/admin.controller");
 
 //get all ip address
-router.get("/",adminController.getIpaddressList);
+router.get("/ip",adminController.getIpaddressList);
 
 //create ip address
 router.post("/",adminController.createNewIpaddress);
@@ -12,8 +12,10 @@ router.post("/",adminController.createNewIpaddress);
 //delete all ipaddress
 router.delete("/",adminController.deleteAllIpaddress);
 
-
 //delete ipaddress
 router.delete("/:ipaddress",adminController.deleteIpaddress);
+
+//get all items
+router.get("/ordered", adminController.getOrderedItems);
 
 module.exports = router;

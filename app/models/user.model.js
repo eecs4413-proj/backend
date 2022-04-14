@@ -1,7 +1,7 @@
 var dbConn = require("../config/db.config");
 
 module.exports = {
-  //Create Address 
+  //Create Address
   createAddress: (data, callBack) => {
     dbConn.query(
       `INSERT INTO Address(street,province,zip,phone,userEmail) values(?,?,?,?,?)`,
@@ -14,7 +14,7 @@ module.exports = {
       }
     );
   },
-  //Retrieve Address according User 
+  //Retrieve Address according User
   getAddressByEmail: (userEmail, callBack) => {
     dbConn.query(
       `SELECT * FROM Address WHERE userEmail=?`,
@@ -34,8 +34,10 @@ module.exports = {
       [data.email, data.pw, data.fname, data.lname, data.admin],
       (error, results, fields) => {
         if (error) {
-         callBack(error);
+          console.log("error");
+          callBack(error);
         }
+        console.log("no error");
         return callBack(null, results);
       }
     );
@@ -77,12 +79,12 @@ module.exports = {
     );
   },
   //Update address
-  updateAddress: (data,callBack)=> {
+  updateAddress: (data, callBack) => {
     dbConn.query(
       `UPDATE Address SET street=?, province=?, zip=?, phone=? WHERE userEmail=?`,
       [data.street, data.province, data.zip, data.phone, data.userEmail],
-      (error,results, fields) => {
-        if(error){
+      (error, results, fields) => {
+        if (error) {
           callBack(error);
         }
         return callBack(null, results);
@@ -99,9 +101,9 @@ module.exports = {
         if (error) {
           return callBack(error);
         }
-        return callBack(null, true);          // When data is deleted, results[0] is always false
+        return callBack(null, true); // When data is deleted, results[0] is always false
         //return callBack(null, results[0]);  // Therefore, return message becomes failed even though it is successful
-                                              // So return true instead of results[0]. (May need to be reviewed)
+        // So return true instead of results[0]. (May need to be reviewed)
       }
     );
   },
@@ -114,11 +116,8 @@ module.exports = {
         if (error) {
           return callBack(error);
         }
-        return callBack(null, true);        
+        return callBack(null, true);
       }
     );
   },
-  
 };
-
-

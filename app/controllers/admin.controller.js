@@ -54,3 +54,10 @@ exports.deleteAllIpaddress = (req, res)=> {
         });
     });
 };
+
+exports.getOrderedItems = (req, res) => {
+    AdminModel.getAllOrderedItems((err, orderedItems) => {
+        if(err) res.send(err);
+        res.send(orderedItems);
+    });
+}

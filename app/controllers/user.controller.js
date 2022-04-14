@@ -8,6 +8,7 @@ const {
   updateAddress,
   deleteAddress,
   deleteUser,
+  duplicateAccountCheck,
 } = require("../models/user.model.js");
 const UserModel = require("../models/user.model.js");
 
@@ -17,27 +18,33 @@ const { sign } = require("jsonwebtoken");
 const { result } = require("lodash");
 
 module.exports = {
-  createAddress: (req,res)=> {
+  createAddress: (req, res) => {
     const body = req.body;
-    createAddress(body,(err,results)=>{
-      if(err) {
-        return res.status(500),json({
-          success: 0,
-          message: "Database connection failed",
-        });
+    createAddress(body, (err, results) => {
+      if (err) {
+        return (
+          res.status(500),
+          json({
+            success: 0,
+            message: "Database connection failed",
+          })
+        );
       }
       return res.status(200).json({
         success: 1,
         data: results,
       });
-    })
+    });
   },
   createUser: (req, res) => {
     const body = req.body;
     const salt = genSaltSync(10);
+
+    //console.log("false");
     body.pw = hashSync(body.pw, salt);
     create(body, (err, results) => {
       if (err) {
+        //console.log(err);
         return res.status(500).json({
           success: 0,
           message: "Database connection failed",
@@ -68,14 +75,14 @@ module.exports = {
       });
     });
   },
-  getAddressByEmail:(req,res)=>{
+  getAddressByEmail: (req, res) => {
     const userEmail = req.params.userEmail;
-    getAddressByEmail(userEmail,(err,results) => {
-      if(err) {
+    getAddressByEmail(userEmail, (err, results) => {
+      if (err) {
         console.log(err);
         return;
       }
-      if(!results){
+      if (!results) {
         return res.status(404).json({
           sucess: 0,
           message: "Record Not Found",
@@ -120,16 +127,16 @@ module.exports = {
       });
     });
   },
-  updateAddress: (req,res) => {
+  updateAddress: (req, res) => {
     const body = req.body;
-    updateAddress(body,(err,results)=> {
-      if(err){
+    updateAddress(body, (err, results) => {
+      if (err) {
         console.log(err);
         return;
       }
-      if(!results) {
+      if (!results) {
         return res.status(402).json({
-          sucess:0,
+          sucess: 0,
           message: "Failed to Update Address",
         });
       }
@@ -159,17 +166,17 @@ module.exports = {
       });
     });
   },
-  deleteAdress: (req,res) => {
+  deleteAdress: (req, res) => {
     const data = req.body;
-    deleteAddress(data,(err, results)=>{
-      if(err) {
+    deleteAddress(data, (err, results) => {
+      if (err) {
         console.log(err);
         return;
       }
       console.log("delete address result: " + results);
-      if(!results){
+      if (!results) {
         return res.status(404).json({
-          sucess: 0, 
+          sucess: 0,
           message: "Record Not Found",
         });
       }
