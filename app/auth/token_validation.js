@@ -8,7 +8,7 @@ module.exports = {
             token = token.slice(7)
             verify(token, "eecs4413",(err, decoded) => {
                 if(err){
-                    res.staus(403).json({
+                    res.status(403).json({
                         sucess: 0,
                         message: "Invalid Token"
                     });
