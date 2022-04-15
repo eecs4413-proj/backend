@@ -61,3 +61,10 @@ exports.getOrderedItems = (req, res) => {
         res.send(orderedItems);
     });
 }
+
+exports.getOrderAttempts = (req, res) => {
+    AdminModel.getOrderAttempts((err, count) => {
+        if(err) res.send(err);
+        res.send(count);
+    });
+}
