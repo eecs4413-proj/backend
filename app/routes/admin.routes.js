@@ -18,4 +18,7 @@ router.delete("/:ipaddress",adminController.deleteIpaddress);
 //get all items
 router.get("/ordered", adminController.getOrderedItems);
 
+//get number of order attempts
+router.get("/checkout", adminController.getOrderAttempts);
+
 module.exports = router;

@@ -69,4 +69,16 @@ Admin.getAllOrderedItems = (result) => {
   );
 };
 
+Admin.getOrderAttempts = (result) => {
+  dbConn.query("SELECT COUNT(*) AS Count FROM CheckOut", (err, res) => {
+    if (err) {
+      console.log("Error while fetching checkount count", err);
+      result(null, err);
+    } else {
+      console.log("Number of CheckOut fetched successfully");
+      result(null, res);
+    }
+  });
+};
+
 module.exports = Admin;
