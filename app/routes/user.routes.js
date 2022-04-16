@@ -27,7 +27,7 @@ router.get("/address/:userEmail",getAddressByEmail);
 router.patch("/address" ,updateAddress);
 
 //Retrieve Users
-router.get("/", checkToken, getUsers);
+router.get("/", getUsers);
 
 //Retrieve Single User
 router.get("/:email", checkToken, getUserByEmail);
