@@ -40,6 +40,7 @@ router.delete("/", checkToken, deleteUser);
 
 //Delete Address
 router.delete("/address", deleteAdress);
+
 //login
 router.post("/login", login);
 module.exports = router;

@@ -44,6 +44,7 @@ exports.createNewShopingCart = (req, res) => {
 // Update a ShoppingCart
 exports.updateShoppingCart = (req, res) => {
   const shoppingcartReqData = new ShoppingCart(req.body);
+  shoppingcartReqData.userEmail = req.params.userEmail;
   console.log("userReqData update", shoppingcartReqData);
   //check null
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
