@@ -55,7 +55,6 @@ ShoppingCart.createShoppingCart = (shoppingcartData, result) => {
 
 //Update ShoppingCart
 ShoppingCart.updateShoppingCart = (userEmail, shoppingcartReqData, result) => {
-  console.log("Email: " + userEmail + " itemNo: " + shoppingcartReqData.itemNo + " Quantity: " + shoppingcartReqData.quantity);
   dbConn.query(
     "UPDATE ShoppingCart SET quantity=? WHERE itemNo=? AND userEmail=?",
     [shoppingcartReqData.quantity, shoppingcartReqData.itemNo, userEmail],
