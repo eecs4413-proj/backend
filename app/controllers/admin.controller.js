@@ -68,3 +68,10 @@ exports.getOrderAttempts = (req, res) => {
         res.send(count);
     });
 }
+
+exports.postOrderAttempts = (req, res) => {
+    AdminModel.postOrderAttempts((err, count) => {
+        if(err) res.send(err);
+        res.send(count);
+    });
+}
