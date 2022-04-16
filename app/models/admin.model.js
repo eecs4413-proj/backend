@@ -81,4 +81,16 @@ Admin.getOrderAttempts = (result) => {
   });
 };
 
+Admin.postOrderAttempts = (result) => {
+  dbConn.query("INSERT INTO CheckOut VALUES()", (err, res) => {
+    if (err) {
+      console.log("Error while increasing checkount count", err);
+      result(null, err);
+    } else {
+      console.log("Number of CheckOut increased successfully");
+      result(null, res);
+    }
+  });
+};
+
 module.exports = Admin;

@@ -21,4 +21,7 @@ router.get("/ordered", adminController.getOrderedItems);
 //get number of order attempts
 router.get("/checkout", adminController.getOrderAttempts);
 
+//post increasing number of order attempts
+router.post("/checkout", adminController.postOrderAttempts);
+
 module.exports = router;
