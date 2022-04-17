@@ -10,8 +10,18 @@ router.get("/", itemController.getItemList);
 //get Item by bid
 router.get("/:bid", itemController.getItembyBid);
 
+//Review APIs
+router.get("/review/:bid", itemController.getReview);
+
 //create new item
 router.post("/", itemController.createNewItem);
+
+router.post("/review",checkToken, itemController.createNewReview);
+
+//update item with bid
+router.put("/:bid", itemController.updateItem);
+
+router.put("/review/:reviewNo", checkToken,itemController.updateReview);
 
 //delete all item
 router.delete("/", itemController.deleteAllItem);
@@ -19,15 +29,6 @@ router.delete("/", itemController.deleteAllItem);
 //delete a item with bid
 router.delete("/:bid", itemController.deleteItem);
 
-//update item with bid
-router.put("/:bid", itemController.updateItem);
-
-//Review APIs
-router.get("/review/:bid", itemController.getReview);
-
-router.post("/review",checkToken, itemController.createNewReview);
-
 router.delete("/review/:reviewNo",checkToken, itemController.deleteReview);
 
-router.put("/review/:reviewNo", checkToken,itemController.updateReview);
 module.exports = router;
