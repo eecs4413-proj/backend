@@ -27,8 +27,7 @@ exports.createNewIpaddress = (req,res) => {
             if(err) res.send(err);
             res.json({
                 status:true,
-                message: "Ipaddress created successfully",
-                data: visitevent.insertipaddress,
+                message: "Ipaddress created successfully"
             });
         });
     }
