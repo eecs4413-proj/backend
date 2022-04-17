@@ -8,6 +8,7 @@ var OrderedItem = function (orderitem){
 }
 
 OrderedItem.getOrderedItemList = (result) => {
+    console.log("Get OrderedItems");
     dbConn.query("SELECT * FROM OrderedItems", (err,res)=>{
         if(err){
             console.log("Error while fetching OrderedItems",err);
