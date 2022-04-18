@@ -1,5 +1,4 @@
-# 4413 Project Backend
-
+# Convenience Store Application Backend
 
 ### Setup: `npm install`
 ### Run: `npm start`
