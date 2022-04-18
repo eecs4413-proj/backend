@@ -34,7 +34,7 @@ exports.createNewOrder = (req,res) => {
             res.json({
                 status: true,
                 message: "Order created successfully",
-                data: order.insertuserEmail,
+                orderNo: order.insertId,
             });
         });
     }
