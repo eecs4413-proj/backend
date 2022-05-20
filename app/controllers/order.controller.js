@@ -34,7 +34,7 @@ exports.createNewOrder = (req,res) => {
             res.json({
                 status: true,
                 message: "Order created successfully",
-                orderNo: order.insertId,
+                orderNo: order.insertId, 
             });
         });
     }
